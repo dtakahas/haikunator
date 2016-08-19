@@ -1,9 +1,13 @@
 
 class Base
-  def build(range, delimiter)
+  def build(range, delimiter, opts)
     result = Array(String | String | Int32).new
-    result << adjectives[rand(adjectives.size)]
-    result << nouns[rand(nouns.size)]
+    custom_adjectives = opts.fetch(:adjectives, nil)
+    custom_nouns = opts.fetch(:nouns, nil)
+    adj_list = custom_adjectives ? custom_adjectives[rand(custom_adjectives.size)] : adjectives[rand(adjectives.size)]
+    noun_list = custom_nouns ? custom_nouns[rand(custom_nouns.size)] : nouns[rand(nouns.size)]
+    result << adj_list
+    result << noun_list
     if range != 0
       result << rand(range)
     end
